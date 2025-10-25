@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Undangan Pernikahan — Yanuar & Akyun</title>
+  <meta name="description" content="Undangan pernikahan Yanuar & Akyun — tradisional Jawa" />
+  <style>
+    /* ============================
+       Reset & dasar
+       ============================ */
+    :root{
+      --bg:#ffffff;
+      --gold:#c99b2d;
+      --muted:#6b6b6b;
+      --accent:var(--gold);
+      --container-width:1000px;
+      --smooth: cubic-bezier(.2,.9,.2,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background:var(--bg);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:scroll;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ============================
+       Layout
+       ============================ */
+    .wrap{
+      max-width:var(--container-width);
+      margin:0 auto;
+      padding:40px 20px;
+    }
+    section{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      padding:60px 20px;
+      overflow:hidden;
+    }
+    .panel{
+      width:100%;
+      max-width:900px;
+      margin:0 auto;
+      background:rgba(255,255,255,0.95);
+      border-radius:12px;
+      padding:40px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.08);
+      border:1px solid rgba(201,155,45,0.08);
+      transform-origin:center;
+      transition:transform 700ms var(--smooth), opacity 700ms var(--smooth);
+      opacity:0;
+      transform:translateY(40px) scale(0.99);
+    }
+    .panel.visible{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
+
+    /* ============================
+       Header / pembuka
+       ============================ */
+    .hero{
+      text-align:center;
+      padding:80px 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+      border-radius:14px;
+      position:relative;
+    }
+    .hero .wayang{
+      position:absolute;
+      left:20px; top:10px; opacity:0.08; transform:rotate(-8deg);
+      width:220px; height:auto;
+    }
+    .hero .wayang.right{
+      right:20px; left:auto; transform:rotate(8deg);
+    }
+    .ornamen-top{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      margin-bottom:30px;
+    }
+    .ornamen{
+      width:80px;height:20px;
+      background:linear-gradient(90deg,var(--gold), #f5d37b);
+      border-radius:10px;
+      box-shadow:0 6px 14px rgba(201,155,45,0.12);
+      transform-origin:center;
+      animation:ornamenOpen 1s ease forwards;
+    }
+    @keyframes ornamenOpen {
+      from{transform:scaleX(0); opacity:0}
+      to{transform:scaleX(1); opacity:1}
+    }
+
+    h1.main-title{
+      font-family: "Playfair Display", "Georgia", serif;
+      font-size:48px;
+      margin:0 0 8px 0;
+      color:#1b1b1b;
+      letter-spacing:0.6px;
+    }
+    .subtitle{
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+    .open-btn{
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 20px;
+      border-radius:30px;
+      background:linear-gradient(90deg,var(--gold), #f6d77f);
+      color:#fff;
+      font-weight:600;
+      box-shadow:0 10px 20px rgba(201,155,45,0.12);
+      border:none;
+      cursor:pointer;
+      transition:transform .2s ease;
+    }
+    .open-btn:active{transform:scale(.98)}
+
+    /* ============================
+       inisial & tanggal
+       ============================ */
+    .initials{
+      text-align:center;
+      font-family: "Playfair Display", serif;
+      font-size:70px;
+      color:var(--gold);
+      letter-spacing:4px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+    .date{
+      margin-top:10px;
+      color:var(--muted);
+      letter-spacing:0.6px;
+      font-weight:600;
+    }
+
+    /* ============================
+       teks undangan (sopan) + QS Ar-Rum 21
+       ============================ */
+    .invitation-text{
+      line-height:1.9;
+      font-size:18px;
+      color:#222;
+    }
+    .quran{
+      margin-top:18px;
+      padding:14px;
+      background:linear-gradient(180deg, rgba(249,244,230,0.6), rgba(255,255,255,0.6));
+      border-left:4px solid var(--gold);
+      border-radius:8px;
+      font-style:italic;
+      color:#333;
+    }
+
+    /* ============================
+       profil pengantin
+       ============================ */
+    .profile-wrap{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .card{
+      width:300px;
+      padding:18px;
+      border-radius:12px;
+      text-align:center;
+      background:rgba(255,255,255,0.98);
+      border:1px solid rgba(201,155,45,0.06);
+    }
+    .avatar{
+      width:140px;
+      height:140px;
+      margin:0 auto 12px;
+      display:block;
+    }
+    .name{
+      font-weight:700;
+      margin-bottom:6px;
+      font-size:18px;
+    }
+    .parents{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* Arabic heading */
+    .arabic-title{
+      font-family: "Amiri", "Scheherazade", serif;
+      font-size:28px;
+      color:#111;
+      text-align:center;
+      margin-bottom:6px;
+    }
+
+    /* ============================
+       detail acara & lokasi
+       ============================ */
+    .event{
+      text-align:center;
+      font-size:18px;
+      line-height:1.6;
+    }
+    .mapframe{
+      width:100%;
+      height:420px;
+      border-radius:10px;
+      overflow:hidden;
+      margin-top:18px;
+      border:1px solid rgba(0,0,0,0.06);
+    }
+
+    /* ============================
+       RSVP & donation
+       ============================ */
+    .rsvp-form{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .rsvp-form input, .rsvp-form textarea{
+      padding:12px 14px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.07);
+      min-width:220px;
+    }
+    .rsvp-send{
+      padding:12px 18px;
+      border-radius:10px;
+      background:var(--gold);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .bank{
+      margin-top:16px;
+      text-align:center;
+      font-weight:700;
+      color:#111;
+    }
+    .bank small{display:block;font-weight:400;color:var(--muted)}
+
+    /* ============================
+       footer
+       ============================ */
+    footer{
+      text-align:center;
+      padding:30px 10px;
+      color:var(--muted);
+    }
+
+    /* ============================
+       decorations: wayang silhouette & corner ornaments
+       ============================ */
+    .corner{
+      position:absolute;
+      width:150px; height:150px;
+      opacity:0.08;
+      pointer-events:none;
+    }
+    .corner.left{left:-20px; top:10px; transform:rotate(-12deg)}
+    .corner.right{right:-20px; bottom:10px; transform:rotate(12deg)}
+
+    /* small screens */
+    @media (max-width:700px){
+      .panel{padding:20px}
+      h1.main-title{font-size:34px}
+      .initials{font-size:48px}
+      .avatar{width:120px;height:120px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- SECTION 1: Pembuka dengan nama & ornamen -->
+    <section id="section-1" aria-label="Pembuka">
+      <div class="panel hero" id="panel-1">
+        <!-- subtle wayang silhouettes -->
+        <svg class="wayang left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="none">
+            <path d="M20 160 q40 -120 120 -120 q20 0 40 20 q-10 40 -60 70 q-60 50 -100 30z" fill="#d3b06b"/>
+          </g>
+        </svg>
+        <svg class="wayang right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M180 160 q-40 -120 -120 -120 q-20 0 -40 20 q10 40 60 70 q60 50 100 30z" fill="#d3b06b" />
+        </svg>
+
+        <div class="ornamen-top" role="img" aria-hidden="true">
+          <div class="ornamen" style="width:120px"></div>
+          <div class="ornamen" style="width:80px"></div>
+          <div class="ornamen" style="width:120px"></div>
+        </div>
+
+        <h1 class="main-title">Yanuar &amp; Akyun</h1>
+        <p class="subtitle">Mengundang Bapak/Ibu serta Saudara/i untuk hadir pada acara pernikahan kami</p>
+        <button class="open-btn" id="open-invite">Buka Undangan</button>
+      </div>
+
+      <!-- corner ornament -->
+      <svg class="corner left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 190 q70 -170 180 -180" stroke="#c99b2d" stroke-width="6" fill="none" />
+      </svg>
+      <svg class="corner right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M190 10 q-170 70 -180 180" stroke="#c99b2d" stroke-width="6" fill="none" />
+      </svg>
+    </section>
+
+    <!-- SECTION 2: Inisial & tanggal -->
+    <section id="section-2" aria-label="Inisial dan tanggal">
+      <div class="panel" id="panel-2">
+        <div style="text-align:center;">
+          <div class="initials">Y &amp; A</div>
+          <div class="date">7 Februari 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Kata undangan sopan + QS Ar-Rum 21 -->
+    <section id="section-3" aria-label="Undangan dan ayat">
+      <div class="panel" id="panel-3">
+        <div class="invitation-text">
+          <p>
+            Assalamu’alaikum warahmatullahi wabarakatuh.<br/>
+            Dengan segala kerendahan hati dan memohon ridho Allah SWT, kami
+            mengundang Bapak/Ibu/Saudara/i untuk hadir serta mendoakan pada
+            acara pernikahan putra-putri kami.
+          </p>
+
+          <div class="quran">
+            <strong>QS. Ar-Rum (30):21 — </strong>
+            “Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan
+            untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung
+            dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu
+            rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar
+            terdapat tanda-tanda bagi kaum yang berpikir.”
+            <div style="margin-top:8px; font-weight:700; text-align:right; color:var(--muted); font-size:13px">
+              (Ar-Rum : 21)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Perkenalan / profil pengantin -->
+    <section id="section-4" aria-label="Perkenalan">
+      <div class="panel" id="panel-4">
+        <div style="text-align:center; margin-bottom:10px;">
+          <div class="arabic-title">بسم الله الرحمن الرحيم</div>
+          <div style="color:var(--muted); margin-bottom:20px;">Dengan menyebut nama Allah, Yang Maha Pengasih lagi Maha Penyayang</div>
+        </div>
+
+        <div class="profile-wrap" role="region" aria-label="Profil pengantin">
+          <!-- Kartu laki-laki -->
+          <div class="card">
+            <!-- simple cartoon male Javanese -->
+            <svg class="avatar" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Avatar Yanuar">
+              <!-- head -->
+              <circle cx="100" cy="60" r="36" fill="#f7d9c4"/>
+              <!-- blangkon -->
+              <path d="M64 60 q36 -42 72 0 q-36 10 -72 0z" fill="#3b2b1a"/>
+              <!-- body pakaian Jawa -->
+              <rect x="40" y="100" width="120" height="110" rx="18" fill="#714b1e"/>
+              <path d="M40 120 q60 30 120 0" fill="#a97b3d" opacity="0.17"/>
+              <!-- details -->
+              <circle cx="88" cy="58" r="3" fill="#2b2b2b"/>
+              <circle cx="112" cy="58" r="3" fill="#2b2b2b"/>
+              <path d="M86 72 q14 12 28 0" stroke="#2b2b2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="name">Yanuar Ridwan Hisyam</div>
+            <div class="parents">Putra dari Bapak Agung Wahyono &amp; Ibu Aesti Amalia Azis</div>
+          </div>
+
+          <!-- Kartu perempuan -->
+          <div class="card">
+            <!-- simple cartoon female Javanese -->
+            <svg class="avatar" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Avatar Akyun">
+              <!-- head -->
+              <circle cx="100" cy="60" r="36" fill="#f7d9c4"/>
+              <!-- sanggul / headdress -->
+              <path d="M60 52 q40 -30 80 0 q-40 18 -80 0z" fill="#3b2b1a"/>
+              <!-- kebaya body -->
+              <rect x="36" y="100" width="128" height="110" rx="18" fill="#7a3a3a"/>
+              <path d="M36 130 q64 -18 128 0" fill="#eabf9a" opacity="0.14"/>
+              <!-- face details -->
+              <circle cx="88" cy="58" r="3" fill="#2b2b2b"/>
+              <circle cx="112" cy="58" r="3" fill="#2b2b2b"/>
+              <path d="M90 76 q10 8 20 0" stroke="#2b2b2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="name">Khurotul Akyun</div>
+            <div class="parents">Putri dari Bapak Zainul Arifin &amp; Ibu Jamila</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: Detail acara (akad & resepsi) + lokasi rumah -->
+    <section id="section-5" aria-label="Detail acara">
+      <div class="panel" id="panel-5">
+        <div class="event">
+          <h2 style="margin-top:0; color:var(--gold)">Undangan Acara</h2>
+          <div style="font-weight:700; margin-bottom:6px;">Temu manten (di rumah)</div>
+          <div>Jl. Api Jama'ari, Gang Tangjung, Gang Mulya, RT.03 / RW.11, Kel. Jogotrunan, Kec. Lumajang, Kab. Lumajang</div>
+          <div style="margin-top:12px; font-weight:700;">Tanggal & Waktu</div>
+          <div>7 Februari 2026 — Akad: 13.00 WIB / Resepsi: 13.30 WIB</div>
+
+          <div class="mapframe" id="mapframe" title="Peta lokasi acara">
+            <!-- Google Maps embed (public iframe) -->
+            <iframe
+              width="100%" height="100%" frameborder="0" style="border:0"
+              src="https://www.google.com/maps?q=Jl.+Api+Jama%27ari,+Gang+Tanggung,+Gang+Mulya,+RT.03,+RW.11,+Kel.+Jogotrunan,+Lumajang&output=embed"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Konfirmasi kehadiran (RSVP) & nomor rekening BCA -->
+    <section id="section-6" aria-label="Konfirmasi & hadiah">
+      <div class="panel" id="panel-6">
+        <div style="text-align:center;">
+          <h2 style="margin-top:0; color:var(--gold)">Konfirmasi Kehadiran & Ucapan</h2>
+          <p style="color:var(--muted)">Mohon konfirmasi kehadiran dan tinggalkan pesan/ucapan. Tombol kirim akan membuka WhatsApp.</p>
+
+          <form id="rsvp" class="rsvp-form" onsubmit="return handleRSVP(event)">
+            <input type="text" id="guestName" placeholder="Nama (misal: Bapak Ahmad)" required />
+            <input type="text" id="guestQty" placeholder="Jumlah hadir (misal: 2)" required />
+            <textarea id="guestMsg" placeholder="Ucapan / do'a (opsional)" rows="1"></textarea>
+            <button type="submit" class="rsvp-send">Kirim via WhatsApp</button>
+          </form>
+
+          <div class="bank" style="margin-top:20px;">
+            <div>Donasi / amplop pernikahan</div>
+            <div style="margin-top:8px; font-size:22px; color:var(--gold)">BCA • <span id="bca-number">YOUR_BCA_ACCOUNT_NUMBER</span></div>
+            <small id="bca-name">Atas nama: YOUR_BCA_ACCOUNT_NAME</small>
+            <div style="margin-top:12px; color:var(--muted); font-size:13px">Terima kasih atas doa dan partisipasinya.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Terima kasih atas perhatian Bapak/Ibu/Saudara/i</div>
+      <div style="margin-top:6px; font-size:13px; color:var(--muted)">Mohon maaf apabila ada kekurangan dalam penyusunan undangan ini.</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ============================
+       Scroll-triggered animations
+       ============================ */
+    const panels = document.querySelectorAll('.panel');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+        }
+      });
+    }, {threshold:0.22});
+
+    panels.forEach(p=>io.observe(p));
+
+    /* Open button: scroll to next section */
+    document.getElementById('open-invite').addEventListener('click', ()=>{
+      document.getElementById('section-2').scrollIntoView({behavior:'smooth'});
+    });
+
+    /* Smooth wheel for nicer feel (optional) */
+    // (kept simple to avoid interfering with mobile scroll)
+
+    /* ============================
+       RSVP handler: build wa.me link
+       ============================ */
+    function phoneNumberForWA(){
+      // USER MUST REPLACE this placeholder with their phone (international, without +)
+      // contoh: 6281234567890
+      return 'YOUR_PHONE_NUMBER_HERE';
+    }
+
+    function handleRSVP(e){
+      e.preventDefault();
+      const name = document.getElementById('guestName').value.trim();
+      const qty = document.getElementById('guestQty').value.trim();
+      const msg = document.getElementById('guestMsg').value.trim();
+
+      const phone = phoneNumberForWA();
+      if(!phone || phone.includes('YOUR_PHONE_NUMBER_HERE')){
+        alert('Silakan ganti placeholder nomor WhatsApp di file HTML (phoneNumberForWA) dengan nomor Anda agar pesan dapat terkirim via WhatsApp.');
+        return false;
+      }
+
+      let text = `Assalamualaikum, saya ${name} mengkonfirmasi hadir sebanyak ${qty} orang.`;
+      if(msg) text += ` Ucapan: ${msg}`;
+      text += `%0A%0ATerima kasih.%0A(Yanuar & Akyun)`;
+
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      return false;
+    }
+
+    /* ============================
+       Helper: replace BCA placeholders (if user wants dynamic set via query params)
+       Example: undangan.html?phone=62812...&bca=1234567890&name=Yanuar
+       ============================ */
+    (function readQueryParams(){
+      const qp = new URLSearchParams(location.search);
+      if(qp.has('phone')){
+        const ph = qp.get('phone').replace(/\D/g,'');
+        if(ph) {
+          // set phone used by phoneNumberForWA via overriding function
+          window.phoneNumberForWA = ()=>ph;
+        }
+      }
+      if(qp.has('bca')) document.getElementById('bca-number').textContent = qp.get('bca');
+      if(qp.has('bca_name')) document.getElementById('bca-name').textContent = 'Atas nama: ' + qp.get('bca_name');
+    })();
+
+    /* Accessibility: focus outlines for keyboard users */
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Tab') document.body.classList.add('show-focus');
+    });
+
+    /* Optional: animate ornaments on load */
+    window.addEventListener('load', ()=> {
+      document.querySelectorAll('.ornamen').forEach((el,i)=>{
+        el.style.transform = 'scaleX(0)';
+        setTimeout(()=> el.style.transform='scaleX(1)', 120*i);
+      });
+    });
+  </script>
+</body>
+</html>
